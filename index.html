@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Superwarm 2D (Superhot Clone)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="hud-overlay"></div>
+  <div id="start-screen">
+    <div class="start-bg"></div>
+    <div class="start-content">
+      <h1>SUPERWARM 2D</h1>
+      <p class="subtitle">Time moves when you move.<br>Choose your mission:</p>
+      <div id="mission-select"></div>
+    </div>
+  </div>
+  <div id="ui">
+    <div id="health">Health: <span id="health-value">3</span></div>
+    <div id="score">Score: <span id="score-value">0</span></div>
+    <div id="level">Level: <span id="level-value">1</span></div>
+    <div id="message" style="display:none;"></div>
+  </div>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <script src="game.js"></script>
+</body>
+</html> 

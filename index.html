@@ -7,13 +7,43 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="tactical-grid"></div>
   <div id="hud-overlay"></div>
   <div id="start-screen">
     <div class="start-bg"></div>
-    <div class="start-content">
-      <h1>SUPERWARM 2D</h1>
-      <p class="subtitle">Time moves when you move.<br>Choose your mission:</p>
-      <div id="mission-select"></div>
+    <main class="main-menu-panel" role="main" aria-label="Main Menu">
+      <header class="logo-area">
+        <img src="logo.svg" alt="Superwarm 2D Logo" class="logo-img" onerror="this.style.display='none'">
+        <h1 class="game-title">SUPERWARM 2D</h1>
+        <div class="game-tagline">Time moves when you move.</div>
+      </header>
+      <nav class="main-nav" aria-label="Main Navigation">
+        <button class="menu-btn" id="play-btn">Play</button>
+        <button class="menu-btn" id="armory-btn">Armory</button>
+        <button class="menu-btn" id="upgrades-btn">Upgrades</button>
+        <button class="menu-btn" id="settings-btn">Settings</button>
+      </nav>
+      <div class="credits-display">Credits: <span id="main-credits-value">0</span></div>
+      <footer class="main-footer">&copy; 2024 Superwarm 2D. All rights reserved. v1.0</footer>
+    </main>
+    <div id="mission-modal" class="modal" hidden>
+      <div class="modal-content">
+        <h2>Select Mission</h2>
+        <div id="mission-select"></div>
+        <button class="close-modal-btn" id="close-mission-modal">Back</button>
+      </div>
+    </div>
+    <div id="story-modal" class="modal" hidden>
+      <div class="modal-content" style="max-width:520px;">
+        <h2>Operation Briefing</h2>
+        <div class="story-text" style="font-size:1.15em;color:#fff;text-align:left;margin-bottom:2em;line-height:1.6;">
+          <b>AGENT:</b> Welcome to SUPERWARM 2D.<br><br>
+          The world is on the brink. A shadowy organization is orchestrating chaos from the shadows. You are our last hope.<br><br>
+          Infiltrate enemy strongholds, eliminate high-value targets, and uncover the truth behind the "Redline Directive."<br><br>
+          Time only moves when you do. Use this to your advantage. Good luck, agent.
+        </div>
+        <button class="close-modal-btn" id="close-story-modal">Continue</button>
+      </div>
     </div>
   </div>
   <div id="ui">
@@ -22,7 +52,7 @@
     <div id="level">Level: <span id="level-value">1</span></div>
     <div id="message" style="display:none;"></div>
   </div>
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <canvas id="gameCanvas" width="1600" height="1200"></canvas>
   <script src="game.js"></script>
 </body>
 </html> 

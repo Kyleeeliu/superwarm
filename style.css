@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Share+Tech+Mono&display=swap');
 
 body {
   margin: 0;
-  background: #070b13;
-  color: #0cf;
-  font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', monospace;
+  background: linear-gradient(135deg, #101312 0%, #1a1e1c 100%);
+  color: #39ff14;
+  font-family: 'Orbitron', 'Share Tech Mono', 'Fira Mono', 'Consolas', monospace;
   overflow: hidden;
 }
 #gameCanvas {
   display: block;
   margin: 40px auto 0 auto;
-  background: #10131a;
-  box-shadow: 0 0 40px #0cf4;
+  background: #181c18;
+  box-shadow: 0 0 40px #39ff1444;
   border-radius: 12px;
-  border: 2px solid #0cf6;
+  border: 2px solid #39ff14;
 }
 #ui {
   position: fixed;
@@ -26,15 +26,15 @@ body {
   z-index: 10;
   pointer-events: none;
   font-size: 1.2em;
-  text-shadow: 0 2px 8px #0cf8, 0 0 2px #fff8;
+  text-shadow: 0 2px 8px #39ff1488, 0 0 2px #fff8;
   font-family: inherit;
 }
 #ui > div {
-  background: rgba(10,20,40,0.85);
+  background: rgba(20,32,20,0.85);
   border-radius: 8px;
   padding: 6px 18px;
-  border: 1.5px solid #0cf6;
-  box-shadow: 0 0 8px #0cf4;
+  border: 1.5px solid #39ff14;
+  box-shadow: 0 0 8px #39ff1444;
   letter-spacing: 0.04em;
 }
 #message {
@@ -42,16 +42,16 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(10,20,40,0.98);
+  background: rgba(20,32,20,0.98);
   color: #fff;
   padding: 32px 48px;
   border-radius: 16px;
   font-size: 2em;
   text-align: center;
   z-index: 100;
-  box-shadow: 0 0 40px #0cf8;
+  box-shadow: 0 0 40px #39ff1488;
   pointer-events: auto;
-  border: 2px solid #e33;
+  border: 2px solid #39ff14;
   font-family: inherit;
 }
 #hud-overlay {
@@ -61,12 +61,20 @@ body {
   z-index: 5;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(0,255,255,0.04) 0px,
-    rgba(0,255,255,0.04) 2px,
+    rgba(57,255,20,0.04) 0px,
+    rgba(57,255,20,0.04) 2px,
     transparent 2px,
     transparent 18px
   );
   animation: scanlines 2s linear infinite;
+}
+#tactical-grid {
+  pointer-events: none;
+  position: fixed;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  z-index: 4;
+  background: repeating-linear-gradient(0deg, rgba(57,255,20,0.07) 0 1px, transparent 1px 40px),
+              repeating-linear-gradient(90deg, rgba(57,255,20,0.07) 0 1px, transparent 1px 40px);
 }
 @keyframes scanlines {
   0% { background-position-y: 0; }
@@ -79,7 +87,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(7,11,19,0.98);
+  background: rgba(16,19,18,0.98);
   flex-direction: column;
   transition: opacity 0.5s;
   font-family: inherit;
@@ -92,7 +100,7 @@ body {
   top: 0; left: 0; width: 100%; height: 100%;
   z-index: 0;
   pointer-events: none;
-  background: repeating-linear-gradient(120deg, #0cf2 0 2px, transparent 2px 40px), repeating-linear-gradient(-120deg, #e332 0 2px, transparent 2px 40px);
+  background: linear-gradient(120deg, #39ff1422 0 2px, transparent 2px 40px), linear-gradient(-120deg, #39ff1422 0 2px, transparent 2px 40px);
   animation: bgmove 6s linear infinite;
   opacity: 0.5;
 }
@@ -100,97 +108,166 @@ body {
   0% { background-position: 0 0, 0 0; }
   100% { background-position: 80px 80px, -80px -80px; }
 }
-.start-content {
+.main-menu-panel {
   position: relative;
   z-index: 1;
-  background: rgba(10,20,40,0.96);
-  border-radius: 18px;
-  padding: 48px 32px 32px 32px;
-  box-shadow: 0 8px 48px #0cf8;
+  background: rgba(30, 40, 36, 0.82);
+  border-radius: 24px;
+  padding: 48px 40px 32px 40px;
+  box-shadow: 0 8px 48px #39ff1444, 0 2px 24px #000a;
   text-align: center;
   min-width: 340px;
-  border: 2px solid #0cf6;
+  max-width: 96vw;
+  border: 2.5px solid #39ff14;
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
   font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.start-content h1 {
-  font-size: 3em;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  color: #0cf;
-  margin-bottom: 0.2em;
-  text-shadow: 0 4px 24px #0cf8, 0 1px 0 #fff2;
-  font-family: inherit;
-}
-.start-content .subtitle {
-  color: #e33;
-  font-size: 1.2em;
+.logo-area {
   margin-bottom: 1.5em;
+}
+.logo-img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 0.5em;
+  filter: drop-shadow(0 0 16px #39ff14cc);
+}
+.game-title {
+  font-size: 2.8em;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  color: #39ff14;
+  margin-bottom: 0.1em;
+  text-shadow: 0 4px 24px #39ff1488, 0 1px 0 #fff2;
+  font-family: inherit;
+}
+.game-tagline {
+  color: #4caf50;
+  font-size: 1.2em;
+  margin-bottom: 1.2em;
   font-weight: 500;
   font-family: inherit;
 }
-#mission-select {
+.main-nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  justify-content: center;
-  margin-bottom: 1.2em;
+  flex-direction: column;
+  gap: 1.2em;
+  margin-bottom: 2em;
+  width: 100%;
 }
-.mission-btn {
-  background: linear-gradient(90deg, #0cf 30%, #e33 100%);
-  color: #fff;
-  font-size: 1.1em;
+.menu-btn {
+  background: linear-gradient(90deg, #39ff14 30%, #4caf50 100%);
+  color: #222;
+  font-size: 1.2em;
   font-family: inherit;
   font-weight: bold;
   border: none;
-  border-radius: 10px;
-  padding: 18px 32px;
+  border-radius: 12px;
+  padding: 18px 0;
   cursor: pointer;
-  box-shadow: 0 2px 16px #0cf6;
+  box-shadow: 0 2px 16px #39ff1444;
   transition: transform 0.15s, box-shadow 0.15s, background 0.3s;
   outline: none;
   letter-spacing: 0.08em;
-  border: 2px solid #e33;
-  text-shadow: 0 2px 8px #0cf8;
+  border: 2px solid #4caf50;
+  text-shadow: 0 2px 8px #39ff1488;
+  width: 260px;
+  max-width: 90vw;
+  margin: 0 auto;
 }
-.mission-btn:hover, .mission-btn:focus {
-  background: linear-gradient(90deg, #e33 10%, #0cf 90%);
+.menu-btn:hover, .menu-btn:focus {
+  background: linear-gradient(90deg, #4caf50 10%, #39ff14 90%);
+  color: #222;
+  transform: scale(1.06);
+  box-shadow: 0 4px 32px #39ff1444, 0 2px 16px #4caf5088;
+}
+.credits-display {
   color: #fff;
-  transform: scale(1.08);
-  box-shadow: 0 4px 32px #e33a, 0 2px 16px #0cf8;
-}
-.mission-codename {
-  color: #0cf;
   font-size: 1.1em;
-  font-weight: bold;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.2em;
-  text-shadow: 0 2px 8px #0cf8;
-}
-.mission-briefing {
-  color: #fff;
-  font-size: 1em;
   margin-bottom: 1.2em;
-  font-family: inherit;
-  background: rgba(0,255,255,0.07);
+  background: rgba(57,255,20,0.07);
   border-radius: 8px;
   padding: 10px 18px;
-  border-left: 3px solid #0cf;
-  box-shadow: 0 2px 12px #0cf2;
+  border-left: 3px solid #39ff14;
+  box-shadow: 0 2px 12px #39ff1422;
+  font-family: inherit;
+}
+.main-footer {
+  color: #39ff14;
+  font-size: 0.95em;
+  margin-top: 2.2em;
+  opacity: 0.7;
+  font-family: inherit;
+}
+.modal {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(16,19,18,0.92);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+.modal[hidden] { display: none; }
+.modal-content {
+  background: rgba(30, 40, 36, 0.96);
+  border-radius: 18px;
+  padding: 36px 24px;
+  min-width: 320px;
+  box-shadow: 0 8px 48px #0cf8;
+  border: 2px solid #0cf6;
+  text-align: center;
+  position: relative;
+  font-family: inherit;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.close-modal-btn {
+  margin-top: 2em;
+  background: #222;
+  color: #fff;
+  border: 2px solid #39ff14;
+  border-radius: 8px;
+  padding: 10px 28px;
+  font-size: 1.1em;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, color 0.2s;
+}
+.close-modal-btn:hover, .close-modal-btn:focus {
+  background: #39ff14;
+  color: #222;
 }
 @media (max-width: 600px) {
-  .start-content {
+  .main-menu-panel {
     min-width: 0;
     padding: 24px 6vw 18px 6vw;
   }
-  .start-content h1 {
-    font-size: 2em;
+  .game-title {
+    font-size: 1.5em;
+  }
+  .main-nav .menu-btn {
+    font-size: 1em;
+    padding: 12px 0;
+    width: 90vw;
+  }
+  .modal-content {
+    min-width: 0;
+    padding: 18px 4vw;
+    max-height: 70vh;
   }
   #mission-select {
-    gap: 10px;
+    gap: 14px;
+    max-height: 48vh;
   }
-  .mission-btn {
-    font-size: 1em;
-    padding: 12px 16px;
+  .mission-entry {
+    padding: 12px 4vw 10px 4vw;
+    max-width: 98vw;
   }
 }
 @media (max-width: 900px) {
@@ -208,4 +285,96 @@ body {
     font-size: 1.2em;
     padding: 16px 8px;
   }
+}
+#mission-select {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: stretch;
+  margin: 18px 0 0 0;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-bottom: 12px;
+}
+.mission-entry {
+  background: rgba(20,32,20,0.92);
+  border-radius: 14px;
+  border: 2px solid #39ff14;
+  box-shadow: 0 2px 16px #39ff1444;
+  padding: 22px 28px 18px 28px;
+  margin: 0 auto;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.mission-entry:hover, .mission-entry:focus-within {
+  box-shadow: 0 4px 32px #39ff1444, 0 2px 16px #4caf5088;
+  border-color: #4caf50;
+}
+.mission-codename {
+  color: #39ff14;
+  font-size: 1.2em;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.3em;
+  text-shadow: 0 2px 8px #39ff1488;
+}
+.mission-briefing {
+  color: #fff;
+  font-size: 1em;
+  margin-bottom: 1.2em;
+  font-family: inherit;
+  background: rgba(57,255,20,0.07);
+  border-radius: 8px;
+  padding: 10px 18px;
+  border-left: 3px solid #39ff14;
+  box-shadow: 0 2px 12px #39ff1422;
+}
+.mission-btn {
+  background: linear-gradient(90deg, #39ff14 30%, #4caf50 100%);
+  color: #222;
+  font-size: 1.1em;
+  font-family: inherit;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 32px;
+  cursor: pointer;
+  box-shadow: 0 2px 16px #39ff1444;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.3s;
+  outline: none;
+  letter-spacing: 0.08em;
+  border: 2px solid #4caf50;
+  text-shadow: 0 2px 8px #39ff1488;
+  margin-top: 0.5em;
+}
+.mission-btn:hover, .mission-btn:focus {
+  background: linear-gradient(90deg, #4caf50 10%, #39ff14 90%);
+  color: #222;
+  transform: scale(1.08);
+  box-shadow: 0 4px 32px #39ff1444, 0 2px 16px #4caf5088;
+}
+@media (max-width: 600px) {
+  #mission-select {
+    gap: 14px;
+  }
+  .mission-entry {
+    padding: 12px 4vw 10px 4vw;
+    max-width: 98vw;
+  }
+}
+.story-text {
+  font-size: 1.15em;
+  color: #fff;
+  text-align: left;
+  margin-bottom: 2em;
+  line-height: 1.6;
+  font-family: inherit;
+  background: rgba(57,255,20,0.04);
+  border-radius: 8px;
+  padding: 18px 18px 18px 18px;
+  border-left: 3px solid #39ff14;
+  box-shadow: 0 2px 12px #39ff1422;
 } 
